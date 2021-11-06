@@ -1,8 +1,12 @@
-import React from 'react'
+import { useState } from 'react'
 import tw from 'tailwind-styled-components'
 import Link from 'next/link'
 
-const search = () => {
+const Search = () => {
+
+    const [pickup, setPickup] = useState("");
+    const [dropoff, setDropoff] = useState("");
+
     return (
         <Wrapper>
             {/* button container */}
@@ -20,8 +24,16 @@ const search = () => {
                     <Square src="https://img.icons8.com/windows/50/000000/square-full.png"/>
                 </FromToIcon>
                 <InputBox>
-                    <Input placeholder="Enter pickup location"/>
-                    <Input placeholder="Where to?"/>
+                    <Input 
+                    placeholder="Enter pickup location"
+                    value={pickup}
+                    onChange={(e) => setPickup (e.target.value)}
+                    />
+                    <Input 
+                    placeholder="Where to?"
+                    value={dropoff}
+                    onChange={(e) => setDropoff (e.target.value)}
+                    />
                 </InputBox>
                 <PlusIcon src="https://img.icons8.com/ios/50/000000/plus-math.png"/>
             </InputContainer>
@@ -31,14 +43,22 @@ const search = () => {
                 Saved Places
             </SavedPlaces>
             {/* Confirm location */}
+            <Link href={{
+                pathname: "/confirm",
+                query: {
+                    pickup: pickup,
+                    dropoff: dropoff
+                }
+            }}>
             <ConfirmLocation>
                 Confirm Location
             </ConfirmLocation>
+            </Link>
         </Wrapper>
     )
 }
 
-export default search
+export default Search
 
 const Wrapper = tw.div `
     bg-gray-300 h-screen
@@ -49,7 +69,7 @@ const BtnContainer = tw.div `
 `
 
 const BackBtn = tw.img `
-    h-12
+    h-12 cursor-pointer
 `
 
 const Circle = tw.img `
@@ -81,7 +101,7 @@ const Input = tw.input `
 `
 
 const PlusIcon = tw.img `
-    w-10 h-10 bg-gray-300 rounded-full ml-3
+    w-10 h-10 bg-gray-300 rounded-full ml-3 cursor-pointer
 `
 
 const SavedPlaces = tw.div `
@@ -89,9 +109,9 @@ const SavedPlaces = tw.div `
 `
 
 const StarIcon = tw.img `
-    bg-gray-400 w-10 h-10 p-2 rounded-full mr-2
+    bg-gray-400 w-10 h-10 p-2 rounded-full mr-2 cursor-pointer
 `
 
 const ConfirmLocation = tw.div `
-    flex p-4 mt-3 my-2 h-14 border p-px flex-col rounded-lg items-center justify-center px-4 py-2 text-2xl text-white bg-black transform hover:scale-105 transition
+    bg-black text-white text-center mt-2 mx-4 px-4 py-3 text-2xl cursor-pointer
 `
