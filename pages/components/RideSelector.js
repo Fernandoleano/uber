@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import tw from 'tailwind-styled-components'
-import { carList } from '../data/carList'
+import { carList } from '../../data/carList'
 import { faUserAlt } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
@@ -9,8 +9,8 @@ const RideSelector = ({ pickupCoordinates, dropoffCoordinates }) => {
     const [rideDuration, setRideDuration] = useState(0);
     
     // getting the ride duration from mapbox API
-    useEffect((rideDuration) => {
-        rideDuration = fetch(`https://api.mapbox.com/directions/v5/mapbox/driving/${pickupCoordinates[0]},${pickupCoordinates[1]};${dropoffCoordinates[0]},${dropoffCoordinates[1]}?access_token=pk.eyJ1IjoiZmVybmFuZG9sZWFubyIsImEiOiJja3Zsb2NlbzIzN3RtMm5xaWdnZWoybWpsIn0.Kz2AC0hNtMUT6uDojPPW3A`)
+    useEffect(() => {
+        const rideDuration = fetch(`https://api.mapbox.com/directions/v5/mapbox/driving/${pickupCoordinates[0]},${pickupCoordinates[1]};${dropoffCoordinates[0]},${dropoffCoordinates[1]}?access_token=pk.eyJ1IjoiZmVybmFuZG9sZWFubyIsImEiOiJja3Zsb2NlbzIzN3RtMm5xaWdnZWoybWpsIn0.Kz2AC0hNtMUT6uDojPPW3A`)
         .then(response => response.json())
         .then(data => {
             setRideDuration(data.routes[0].duration / 100)
