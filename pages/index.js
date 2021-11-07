@@ -1,22 +1,39 @@
-import { useEffect } from 'react'
-import Head from 'next/head'
-import Image from 'next/image'
+import { useEffect, useState } from 'react'
 import tw from 'tailwind-styled-components'
 import Map from './components/Map'
 import Link from 'next/link'
+import { auth } from '../firebase'
+import { onAuthStateChanged, signOut } from 'firebase/auth'
+import { useRouter } from 'next/router'
 
 export default function Home() {
+
+  const [user, setUser] = useState(null)
+  const router = useRouter()
+
+  useEffect(() => {
+    return onAuthStateChanged(auth, user => {
+      if (user) {
+        setUser({
+          name: user.displayName,
+          photoUrl: user.photoURL,
+        })
+      } else {
+        setUser(null)
+        router.push('/login')
+      }
+    })
+  }, [])
 
   return (
       <Wrapper>
         <Map id='map'>map</Map>
         <ActionItems>
-
       {/* Header */}
       <Header><UberLogo src="https://i.ibb.co/84stgjq/uber-technologies-new-20218114.jpg" />
         <Profile>
-        <Name>Fernando Leano</Name>
-        <UserImg src="https://lh3.googleusercontent.com/ogw/ADea4I6n-_RZLGOQKVfncc97jpOBe4LLcTKcVjI7QFeQxA=s83-c-mo" />
+        <Name>{user && user.name}</Name>
+        <UserImg src={user && user.photoUrl} onClick={() => signOut(auth)}/>
         </Profile>
       </Header>
       {/* action button */}
@@ -66,7 +83,7 @@ const UberLogo = tw.img `
 `
 
 const UserImg = tw.img `
-  h-12 w-12 rounded-full border border-gray-200 p-px
+  h-12 w-12 rounded-full border border-gray-200 p-px cursor-pointer
 `
 
 const Profile = tw.div `
