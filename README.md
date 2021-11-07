@@ -1,13 +1,13 @@
 This is a Uber clone That I'm working on It's mobile friendly and it's amazing!
 
-Url: fernandouber.netlify.app
+Url: https://fernandouber.netlify.app/login
 
 ![image](https://user-images.githubusercontent.com/68082556/140631432-87b45f6e-6700-4390-beb0-89ec6b880d5a.png)
 ![image](https://user-images.githubusercontent.com/68082556/140631444-29338a0c-3d8f-4eb5-b42a-7172a10cfcf7.png)
 ![image](https://user-images.githubusercontent.com/68082556/140631501-221fe365-3847-478b-9c63-386a7c0f0da4.png)
 ![image](https://user-images.githubusercontent.com/68082556/140631528-8c2ede40-1f27-4b6f-994f-2707cee91fe5.png)
 
-
+Technologys, languages, frameworks used to make this app: Next.js, react.js, tailwindcss, css, mapbox API, API, Html, fontawsome, firebase, javascript, Data.
 
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
